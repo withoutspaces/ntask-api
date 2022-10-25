@@ -1,10 +1,11 @@
 const express = require('express')
 const consign = require('consign')
 const app = express()
-const PORT = 3000
 
 consign({ cwd: 'src' })
-  .include('models')
+  .include('db.js')
+  .then('models')
+  .then('associations.js')
   .then('libs/middlewares.js')
   .then('routes')
   .then('libs/boot.js')
