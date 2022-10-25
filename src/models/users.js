@@ -1,29 +1,34 @@
 const { DataTypes } = require('sequelize')
+
 module.exports = app => {
-  const Tasks = app.db.define('Tasks', {
+  const Users = app.db.define('Users', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    title: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
-    done: {
-      type: DataTypes.BOOLEAN,
+    password: {
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: false
+      validate: {
+        notEmpty: true
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: true
+      }
     }
   })
-  return Tasks
+  return Users
 }
-
-/*
-A	função		app.db.define('Tasks')		é	responsável	por	criar	a
-classe	modelo	no	back-end	e	criar	uma	respectiva	tabela	no	banco
-de	 dados.
-*/
