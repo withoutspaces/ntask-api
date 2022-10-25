@@ -1,5 +1,15 @@
 module.exports = app => {
-  app.listen(app.get('port'), () => {
-    console.log(`NTASK API - porta ${app.get('port')}`)
-  })
+  async function start(port) {
+    try {
+      await app.db.authenticate()
+      await app.db.sync()
+      app.listen(port, () => {
+        console.log(`NTASK API - porta ${port}`)
+      })
+    } catch (error) {
+      console.log('Erro de conexão com o banco de dados.')
+      console.log(err)
+    }
+  }
+  start(app.get('port'))
 }
