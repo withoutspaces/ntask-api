@@ -2,7 +2,7 @@ const express = require('express')
 const consign = require('consign')
 const app = express()
 
-consign({ cwd: 'src' })
+consign({ cwd: 'src', verbose: false })
   .include('db.js')
   .then('models')
   .then('associations.js')
@@ -11,3 +11,5 @@ consign({ cwd: 'src' })
   .then('routes')
   .then('libs/boot.js')
   .into(app)
+
+module.exports = app
